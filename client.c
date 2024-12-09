@@ -132,7 +132,7 @@ void receive_response() {
 int main() {
     const char *server_ip = "127.0.0.1"; 
     const char *filename = "example.txt"; 
-    int data_port = 5555; 
+    int data_port = 12345; 
 
     send_udp_request(server_ip, filename, data_port);
 
