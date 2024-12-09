@@ -24,7 +24,6 @@ void send_udp_request(const char *server_ip, const char *filename, int data_port
     server_addr.sin_port = htons(UDP_PORT);
     inet_pton(AF_INET, server_ip, &server_addr.sin_addr);
 
-    // Format and send the request
     snprintf(buffer, BUFFER_SIZE, "GET %s %d", filename, data_port);
     if (sendto(udp_socket, buffer, strlen(buffer), 0, (struct sockaddr *)&server_addr, sizeof(server_addr)) < 0) {
         perror("Failed to send UDP packet");
@@ -131,17 +130,14 @@ void receive_response() {
 }
 
 int main() {
-    const char *server_ip = "127.0.0.1"; // Địa chỉ server
-    const char *filename = "example.txt"; // Tên file muốn yêu cầu
-    int data_port = 12345; // Cổng TCP để nhận file
+    const char *server_ip = "127.0.0.1"; 
+    const char *filename = "example.txt"; 
+    int data_port = 5555; 
 
-    // Gửi yêu cầu UDP
     send_udp_request(server_ip, filename, data_port);
 
-    // Nhận file qua TCP
     receive_file(data_port);
 
-    // Nhận phản hồi từ server
     receive_response();
 
     return 0;

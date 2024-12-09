@@ -55,7 +55,6 @@ void *handle_client(void *arg) {
         pthread_exit(NULL);
     }
 
-    // Send file data
     file_fd = open(client_data->filename, O_RDONLY);
     if (file_fd < 0) {
         perror("File open failed");
